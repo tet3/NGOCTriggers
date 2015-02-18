@@ -1,16 +1,20 @@
 trigger InsertContactAddressonCreate on Contact (after insert) {
-        rC_Bios__Contact_Address__c ConAdd=new rC_Bios__Contact_Address__c();
-    for(Contact c:trigger.new)
+        List<rC_Bios__Contact_Address__c> ConAdds = new List<rC_Bios__Contact_Address__c>();
     
-    If (c.MailingStreet <> null) {{
-        ConAdd.rC_Bios__Contact__c=c.id;
-        ConAdd.rC_Bios__Original_Street_Line_1__c=c.MailingStreet;
-        ConAdd.rC_Bios__Original_City__c=c.MailingCity;
-        ConAdd.rC_Bios__Original_State__c=c.MailingState;
-        ConAdd.rC_Bios__Original_Postal_Code__c=c.MailingPostalCode;
-        ConAdd.rC_Bios__Original_Country__c=c.MailingCountry;
-        ConAdd.rC_Bios__Type__c='Home';
+    for(Contact c:trigger.new) {
+            If (c.MailingStreet <> null) {
+                rC_Bios__Contact_Address__c ConAdd = new rC_Bios__Contact_Address__c(
+                        rC_Bios__Contact__c=c.id;
+                        rC_Bios__Original_Street_Line_1__c=c.MailingStreet;
+                        rC_Bios__Original_City__c=c.MailingCity;
+                        rC_Bios__Original_State__c=c.MailingState;
+                        rC_Bios__Original_Postal_Code__c=c.MailingPostalCode;
+                        rC_Bios__Original_Country__c=c.MailingCountry;
+                        rC_Bios__Type__c='Home');
+                ConAdds.add(ConAdd);
+            }
     }
-        
-            insert ConAdd;}
+    
+    if (!ConAdds.isEmpty())
+        insert ConAdds;
 }
