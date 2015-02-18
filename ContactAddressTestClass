@@ -1,0 +1,18 @@
+@isTest
+private class InsertContactAddressonCreateTestClass {
+static testMethod void validateInsertContactAddressonCreate() {
+Account a = new Account(Name='Test1X2X3');
+Contact c = new Contact(LastName='Test', AccountID=a.id,MailingStreet='123 Lane',MailingCity='Indy',MailingState='IN',MailingPostalCode='46220',MailingCountry='USA');
+rC_Bios__Contact_Address__c CA = new rC_Bios__Contact_Address__c();
+System.debug('Account ID equals: ' + a.ID);
+System.debug('Account ID according to contact equals: ' + c.AccountID);
+// Insert Contact
+insert a;
+insert c;
+// Retrieve the new ContactAddress
+CA = [SELECT rC_Bios__Contact__r.Id FROM rC_Bios__Contact_Address__c WHERE rC_Bios__Contact__r.Id =:c.Id];
+System.debug('Address after insert Contact ID is: ' + c.ID);
+// Test that the trigger correctly inserted the Contact Address
+System.assertEquals(c.ID, CA.rC_Bios__Contact__r.ID);
+}
+}
