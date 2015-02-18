@@ -1,6 +1,7 @@
 # NGOCTriggers
 
-Setup Triggers on Contact and Account Objects
+Setup Triggers on Contact and Account Objects. 
+
 Test Classes need to be written... To Follow if time allows
 
 Triggers have been tested with standard NGOC/Advancement Connect Features
