@@ -4,12 +4,12 @@ trigger InsertContactAddressonCreate on Contact (after insert) {
         for(Contact c:trigger.new) {
             If (c.MailingStreet <> null) {
                 rC_Bios__Contact_Address__c ConAdd = new rC_Bios__Contact_Address__c(
-                        rC_Bios__Contact__c=c.id;
-                        rC_Bios__Original_Street_Line_1__c=c.MailingStreet;
-                        rC_Bios__Original_City__c=c.MailingCity;
-                        rC_Bios__Original_State__c=c.MailingState;
-                        rC_Bios__Original_Postal_Code__c=c.MailingPostalCode;
-                        rC_Bios__Original_Country__c=c.MailingCountry;
+                        rC_Bios__Contact__c=c.id,
+                        rC_Bios__Original_Street_Line_1__c=c.MailingStreet,
+                        rC_Bios__Original_City__c=c.MailingCity,
+                        rC_Bios__Original_State__c=c.MailingState,
+                        rC_Bios__Original_Postal_Code__c=c.MailingPostalCode,
+                        rC_Bios__Original_Country__c=c.MailingCountry,
                         rC_Bios__Type__c='Home');
                 ConAdds.add(ConAdd);
             }
